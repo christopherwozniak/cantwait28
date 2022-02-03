@@ -17,6 +17,7 @@ class AddCubit extends Cubit<AddState> {
   ) async {
     try {
       await _itemsRepository.add(title, imageURL, releaseDate);
+      emit(const AddState(saved: true));
     } catch (error) {
       emit(AddState(errorMessage: error.toString()));
     }

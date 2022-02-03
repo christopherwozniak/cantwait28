@@ -4,9 +4,10 @@ class ItemModel {
       required this.title,
       required this.imageURL,
       required this.relaseDate});
+
+  final String id;
   final String title;
   final String imageURL;
-  final String id;
   final DateTime relaseDate;
 
   String daysLeft() {
