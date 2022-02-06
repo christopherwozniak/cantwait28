@@ -15,33 +15,31 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Can\'t Wait 🤩'),
-        ),
-        body: BlocProvider(
-          create: (context) =>
-              DetailsCubit(ItemsRepository())..getItemWithID(id),
-          child: BlocBuilder<DetailsCubit, DetailsState>(
-            builder: (context, state) {
-              final itemModel = state.itemModel;
-
-              if (itemModel == null) {
-                return const CircularProgressIndicator();
-              }
-
-              return ListView(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20,
+      appBar: AppBar(
+        title: const Text('Can\'t Wait 🤩'),
+      ),
+      body: BlocProvider(
+        create: (context) => DetailsCubit(ItemsRepository())..getItemWithID(id),
+        child: BlocBuilder<DetailsCubit, DetailsState>(
+          builder: (context, state) {
+            final itemModel = state.itemModel;
+            if (itemModel == null) {
+              return const CircularProgressIndicator();
+            }
+            return ListView(
+              padding: const EdgeInsets.symmetric(
+                vertical: 20,
+              ),
+              children: [
+                _ListViewItem(
+                  itemModel: itemModel,
                 ),
-                children: [
-                  _ListViewItem(
-                    itemModel: itemModel,
-                  ),
-                ],
-              );
-            },
-          ),
-        ));
+              ],
+            );
+          },
+        ),
+      ),
+    );
   }
 }
 
@@ -96,7 +94,7 @@ class _ListViewItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          itemModel.relaseDate.toString().toString(),
+                          itemModel.relaseDateFormatted(),
                         ),
                       ],
                     ),
